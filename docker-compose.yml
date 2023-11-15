@@ -1,22 +1,27 @@
-version: "3"
+version: '3'
 
 services:
   minecraft:
     image: itzg/minecraft-server
     volumes:
-      - minecraftdata:/data
-      - /home/Minecraft/plugins:/plugins
+      - minecraftdata3:/data
+      - plugins3:/plugins
     ports:
-      - 25565:25565
+      - ${HOST_PORT:25565}
     environment:
       EULA: "TRUE"
-      TYPE: "BUKKIT"
+      TYPE: {TYPE}
+      VERSION: {VERSION}
+      MEMORY: {MEMORY}
       OPS: "Rooiepanda"
       ENABLE_WHITELIST: "TRUE"
       ENFORCE_WHITELIST: "TRUE"
+      RCON_PORT: ${RCON_PORT:-25574}
     tty: true
     stdin_open: true
     restart: unless-stopped
+
 volumes:
-  minecraftdata:
-    external: true
+  minecraftdata3:
+  plugins3:
+
